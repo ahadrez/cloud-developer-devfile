@@ -1,0 +1,44 @@
+schemaVersion: 2.2.2
+metadata:
+  name: tf-devspace-dev
+components:
+  - name: base
+    container:
+      image: quay.io/upstream/devspaces:0.0.1
+      memoryLimit: '2Gi'
+      memoryRequest: '1Gi'
+      cpuLimit: '2'
+      cpuRequest: '1'
+      mountSources: true
+      env:
+        - name: TF_CLI_CONFIG_FILE
+          value: /projects/terraform-mirrored-providers/.terraformrc
+projects:
+  - name: terraform-mirrored-providers
+    git:
+      remotes:
+        origin: 'https://github.com/ahadrez/terraform-mirrored-providers.git'
+  - name: create-vm-module-demo
+    git:
+      remotes:
+        origin: 'https://github.com/ahadrez/vm-demo-gcp.git'
+
+commands:
+  - id: set-ca-files
+    exec:
+      component: base
+      commandLine: "gcloud config set core/custom_ca_certs_file /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt"
+      workingDir: ${PROJECTS_ROOT}
+      group:
+        kind: run
+  - id: configure-gcloud
+    exec:
+      component: base
+      commandLine: "/home/user/.devspace-init/init.sh"
+      workingDir: ${PROJECTS_ROOT}
+      group:
+        kind: run
+events:
+  postStart:
+    - set-ca-files
+    - configure-gcloud
