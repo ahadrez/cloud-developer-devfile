@@ -34,7 +34,7 @@ commands:
   - id: configure-gcloud
     exec:
       component: base
-      commandLine: "/home/user/.devspace-init/init.sh"
+      commandLine: "${PROJECTS_ROOT}/terraform-mirrored-providers/.devspace-init/init.sh"
       workingDir: ${PROJECTS_ROOT}
       group:
         kind: run
