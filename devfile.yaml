@@ -1,13 +1,6 @@
 schemaVersion: 2.2.2
 metadata:
   name: tf-devspace-dev
-attributes:
-  che-editor:
-    id: eclipse/che-code/insiders
-    version: latest
-  vscode:
-    extensions:
-      - https://raw.githubusercontent.com/ahadrez/terraform-mirrored-providers/main/hashicorp.terraform-2.34.3-linux-x64.vsix
 components:
   - name: terraform-env
     container:
@@ -54,5 +47,4 @@ commands:
         
 events:
   postStart:
-    - set-ca-files
     - install-terraform-extension
