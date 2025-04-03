@@ -7,9 +7,9 @@ attributes:
     version: latest
   vscode:
     extensions:
-      - https://raw.githubusercontent.com/ahadrez/terraform-mirrored-providers/main/hashicorp.terraform-2.34.3-linux-x64.vsix  
+      - https://raw.githubusercontent.com/ahadrez/terraform-mirrored-providers/main/hashicorp.terraform-2.34.3-linux-x64.vsix
 components:
-  - name: runtime
+  - name: terraform-env
     container:
       image: quay.io/upstream/devspaces:0.0.1
       memoryLimit: '2Gi'
@@ -32,10 +32,12 @@ projects:
 commands:
   - id: set-ca-files
     exec:
-      component: runtime
+      component: terraform-env
       commandLine: "gcloud config set core/custom_ca_certs_file /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt"
       workingDir: ${PROJECTS_ROOT}
       group:
-        kind: run
+        kind: build
         isDefault: true
-
+events:
+  postStart:
+    - set-ca-files
