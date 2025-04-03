@@ -39,7 +39,7 @@ commands:
       commandLine: |
         until command -v code-oss &> /dev/null; do
           echo "Waiting for code-oss to be available..."
-          sleep 5
+          sleep 1
         done
         echo "Installing Terraform extension from local .vsix..."
         code-oss --install-extension ${PROJECTS_ROOT}/terraform-mirrored-providers/hashicorp.terraform-2.34.3-linux-x64.vsix || echo "Extension may already be installed"
