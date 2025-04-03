@@ -12,7 +12,9 @@ components:
       mountSources: true
       env:
         - name: TF_CLI_CONFIG_FILE
-          value: /projects/terraform-mirrored-providers/.terraformrc
+          value: /projects/terraform-mirrored-providers/.terraformrc'
+        - name: 'DEFAULT_EXTENSIONS'
+          value: '/projects/terraform-mirrored-providers/hashicorp.terraform-2.34.3-linux-x64.vsix'
 projects:
   - name: terraform-mirrored-providers
     git:
@@ -47,4 +49,5 @@ commands:
         
 events:
   postStart:
+    - set-ca-files
     - install-terraform-extension
