@@ -1,6 +1,13 @@
 schemaVersion: 2.2.2
 metadata:
   name: tf-devspace-dev-01
+attributes:
+  che-editor:
+    id: eclipse/che-code/insiders
+    version: latest
+  vscode:
+    extensions:
+      - https://raw.githubusercontent.com/ahadrez/terraform-mirrored-providers/main/hashicorp.terraform-2.34.3-linux-x64.vsix  
 components:
   - name: runtime
     container:
@@ -31,22 +38,4 @@ commands:
       group:
         kind: run
         isDefault: true
-commands:
-  - id: install-terraform-extension
-    exec:
-      label: "Install Terraform extension"
-      component: runtime
-      commandLine: |
-        until command -v code-oss &> /dev/null; do
-          echo "Waiting for code-oss to be available..."
-          sleep 1
-        done
-        echo "Installing Terraform extension from local .vsix..."
-        code-oss --install-extension ${PROJECTS_ROOT}/terraform-mirrored-providers/hashicorp.terraform-2.34.3-linux-x64.vsix || echo "Extension may already be installed"
-      workingDir: ${PROJECTS_ROOT}
-      group:
-        kind: build
-        isDefault: false
-events:
-  postStart:
-    - install-terraform-extension
+
