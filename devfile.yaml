@@ -26,14 +26,14 @@ projects:
 commands:
   - id: set-ca-files
     exec:
-      component: base
+      component: tools
       commandLine: "gcloud config set core/custom_ca_certs_file /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt"
       workingDir: ${PROJECTS_ROOT}
       group:
         kind: run
   - id: insstall-terraform-extension
     exec:
-      component: base
+      component: tools
       commandLine: "code-oss --install-extension ${PROJECTS_ROOT}/terraform-mirrored-providers/hashicorp.terraform-2.34.3-linux-x64.vsix"
       workingDir: ${PROJECTS_ROOT}
       group:
