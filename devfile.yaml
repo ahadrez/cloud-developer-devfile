@@ -37,7 +37,22 @@ commands:
       workingDir: ${PROJECTS_ROOT}
       group:
         kind: build
-        isDefault: true
+        isDefault: false
+  - id: install-terraform-extension
+    exec:
+      label: "Install Terraform extension from local path"
+      component: terraform-env
+      commandLine: |
+        echo "Installing Terraform extension..."
+        /checode/checode-linux-libc/ubi9/bin/remote-cli/code-oss \
+          --install-extension ${PROJECTS_ROOT}/terraform-mirrored-providers/hashicorp.terraform-2.34.3-linux-x64.vsix \
+          || echo "Extension install failed or already installed"
+      workingDir: ${PROJECTS_ROOT}
+      group:
+        kind: build
+        isDefault: false
+        
 events:
   postStart:
     - set-ca-files
+    - install-terraform-extension
