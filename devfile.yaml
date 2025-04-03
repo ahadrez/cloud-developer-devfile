@@ -31,14 +31,14 @@ commands:
       workingDir: ${PROJECTS_ROOT}
       group:
         kind: run
-  - id: configure-gcloud
+  - id: insstall-terraform-extension
     exec:
       component: base
-      commandLine: "${PROJECTS_ROOT}/terraform-mirrored-providers/.devspace-init/init.sh"
+      commandLine: "code-oss --install-extension ${PROJECTS_ROOT}/terraform-mirrored-providers/hashicorp.terraform-2.34.3-linux-x64.vsix"
       workingDir: ${PROJECTS_ROOT}
       group:
         kind: run
 events:
   postStart:
     - set-ca-files
-    - configure-gcloud
+    - insstall-terraform-extension
