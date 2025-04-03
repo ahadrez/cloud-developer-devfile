@@ -2,7 +2,7 @@ schemaVersion: 2.2.2
 metadata:
   name: tf-devspace-dev
 components:
-  - name: base
+  - name: tools
     container:
       image: quay.io/upstream/devspaces:0.0.1
       memoryLimit: '2Gi'
@@ -22,7 +22,6 @@ projects:
     git:
       remotes:
         origin: 'https://github.com/ahadrez/vm-demo-gcp.git'
-
 commands:
   - id: set-ca-files
     exec:
@@ -31,7 +30,7 @@ commands:
       workingDir: ${PROJECTS_ROOT}
       group:
         kind: run
-  - id: insstall-terraform-extension
+  - id: install-terraform-extension
     exec:
       component: tools
       commandLine: "code-oss --install-extension ${PROJECTS_ROOT}/terraform-mirrored-providers/hashicorp.terraform-2.34.3-linux-x64.vsix"
@@ -41,4 +40,4 @@ commands:
 events:
   postStart:
     - set-ca-files
-    - insstall-terraform-extension
+    - install-terraform-extension
