@@ -1,6 +1,6 @@
 schemaVersion: 2.2.2
 metadata:
-  name: tf-devspace-dev-01
+  name: tf-devspace-dev
 attributes:
   che-editor:
     id: eclipse/che-code/insiders
