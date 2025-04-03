@@ -14,7 +14,7 @@ components:
         - name: TF_CLI_CONFIG_FILE
           value: /projects/terraform-mirrored-providers/.terraformrc'
         - name: 'DEFAULT_EXTENSIONS'
-          value: '/home/tooling/terraform-linux-x64.vsix'
+          value: '/home/tooling/terraform.vsix'
 projects:
   - name: terraform-mirrored-providers
     git:
