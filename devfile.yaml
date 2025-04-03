@@ -1,6 +1,6 @@
 schemaVersion: 2.2.2
 metadata:
-  name: tf-devspace-dev
+  name: tf-devspace-dev-01
 components:
   - name: runtime
     container:
