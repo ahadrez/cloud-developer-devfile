@@ -31,19 +31,22 @@ commands:
       group:
         kind: run
         isDefault: true
+commands:
   - id: install-terraform-extension
     exec:
+      label: "Install Terraform extension"
       component: runtime
-      commandLine: code-oss --install-extension ${PROJECTS_ROOT}/terraform-mirrored-providers/hashicorp.terraform-2.34.3-linux-x64.vsix
+      commandLine: |
+        until command -v code-oss &> /dev/null; do
+          echo "Waiting for code-oss to be available..."
+          sleep 5
+        done
+        echo "Installing Terraform extension from local .vsix..."
+        code-oss --install-extension ${PROJECTS_ROOT}/terraform-mirrored-providers/hashicorp.terraform-2.34.3-linux-x64.vsix || echo "Extension may already be installed"
       workingDir: ${PROJECTS_ROOT}
       group:
-        kind: run
-        isDefault: true
-  - id: debug
-    exec:
-      component: runtime
-      commandLine: ls -al  ${PROJECTS_ROOT}/terraform-mirrored-providers/hashicorp.terraform-2.34.3-linux-x64.vsix
-      workingDir: ${PROJECTS_ROOT}
-      group:
-        kind: run
-        isDefault: true
+        kind: build
+        isDefault: false
+events:
+  postStart:
+    - install-terraform-extension
