@@ -4,30 +4,30 @@ metadata:
 components:
   - name: terraform-env
     container:
-      image: quay.io/upstream/devspaces:0.0.1
+      image: quay.io/upstream/devspaces:0.0.1 # Base image for the development container
       memoryLimit: '2Gi'
       memoryRequest: '1Gi'
       cpuLimit: '2'
       cpuRequest: '1'
       mountSources: true
       env:
-        - name: TF_CLI_CONFIG_FILE
+        - name: TF_CLI_CONFIG_FILE 
           value: /projects/terraform-mirrored-providers/.terraformrc'
-        - name: 'DEFAULT_EXTENSIONS'
+        - name: 'DEFAULT_EXTENSIONS' # Install terraform vscode extension
           value: '/home/tooling/terraform.vsix'
 projects:
   - name: terraform-mirrored-providers
     git:
       remotes:
-        origin: 'https://github.com/ahadrez/terraform-mirrored-providers.git'
+        origin: 'https://github.com/ahadrez/terraform-mirrored-providers.git' # Project containing mirrored provider configs and modules.
   - name: create-vm-module-demo
     git:
       remotes:
-        origin: 'https://github.com/ahadrez/vm-demo-gcp.git'
+        origin: 'https://github.com/ahadrez/vm-demo-gcp.git' # Demo project using a module to create VMs on GCP
 commands:
-  - id: set-ca-files
+  - id: set-ca-files # Command to configure gcloud to use a custom CA certs file if your environment behind proxy
     exec:
-      component: terraform-env
+      component: terraform-env 
       commandLine: "gcloud config set core/custom_ca_certs_file /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt"
       workingDir: ${PROJECTS_ROOT}
       group:
@@ -36,4 +36,4 @@ commands:
         
 events:
   postStart:
-    - set-ca-files
+    - set-ca-files # Runs this command automatically after the workspace starts
