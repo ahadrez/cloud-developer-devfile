@@ -4,7 +4,7 @@ metadata:
 components:
   - name: terraform-env
     container:
-      image: quay.io/upstream/devspaces:0.0.1 # Base image for the development container
+      image: quay.io/upstream/cloud-developer-image:ubi9-latest # Base image for the development container
       memoryLimit: '2Gi'
       memoryRequest: '1Gi'
       cpuLimit: '2'
