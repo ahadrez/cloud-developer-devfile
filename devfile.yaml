@@ -16,14 +16,14 @@ components:
         - name: 'DEFAULT_EXTENSIONS' # Install terraform vscode extension
           value: '/home/tooling/terraform.vsix'
 projects:
-  - name: create-vm-module-demo
-    git:
-      remotes:
-        origin: 'https://github.com/ahadrez/vm-demo-gcp.git' # Demo project using a module to create VMs on GCP
   - name: terraform-mirrored-providers
     git:
       remotes:
         origin: 'https://github.com/ahadrez/terraform-mirrored-providers.git' # Project containing mirrored provider configs and modules.
+  - name: create-vm-module-demo
+    git:
+      remotes:
+        origin: 'https://github.com/ahadrez/vm-demo-gcp.git' # Demo project using a module to create VMs on GCP
 commands:
   - id: set-ca-files # Command to configure gcloud to use a custom CA certs file if your environment behind proxy
     exec:
